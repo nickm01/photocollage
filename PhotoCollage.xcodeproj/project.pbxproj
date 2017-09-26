@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0109E3881F79C3F6004BBA8F /* PhotoServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0109E3871F79C3F5004BBA8F /* PhotoServiceProtocol.swift */; };
 		0109E38A1F79C684004BBA8F /* TestPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0109E3891F79C684004BBA8F /* TestPhotoService.swift */; };
+		0109E38C1F7B15A4004BBA8F /* PhotoMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0109E38B1F7B15A4004BBA8F /* PhotoMeta.swift */; };
 		01F968801F71C9BD00C6BB89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F9687F1F71C9BD00C6BB89 /* AppDelegate.swift */; };
 		01F968821F71C9BD00C6BB89 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F968811F71C9BD00C6BB89 /* PhotoViewController.swift */; };
 		01F9688A1F71C9BD00C6BB89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01F968881F71C9BD00C6BB89 /* LaunchScreen.storyboard */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		0109E3871F79C3F5004BBA8F /* PhotoServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceProtocol.swift; sourceTree = "<group>"; };
 		0109E3891F79C684004BBA8F /* TestPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPhotoService.swift; sourceTree = "<group>"; };
+		0109E38B1F7B15A4004BBA8F /* PhotoMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMeta.swift; sourceTree = "<group>"; };
 		01F9687C1F71C9BD00C6BB89 /* PhotoCollage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCollage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F9687F1F71C9BD00C6BB89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01F968811F71C9BD00C6BB89 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				0109E3871F79C3F5004BBA8F /* PhotoServiceProtocol.swift */,
 				01F9689F1F71CF4C00C6BB89 /* PhotoService.swift */,
 				0109E3891F79C684004BBA8F /* TestPhotoService.swift */,
+				0109E38B1F7B15A4004BBA8F /* PhotoMeta.swift */,
 				01F968881F71C9BD00C6BB89 /* LaunchScreen.storyboard */,
 				01F9688B1F71C9BD00C6BB89 /* Info.plist */,
 			);
@@ -203,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0109E38C1F7B15A4004BBA8F /* PhotoMeta.swift in Sources */,
 				01F968821F71C9BD00C6BB89 /* PhotoViewController.swift in Sources */,
 				0109E3881F79C3F6004BBA8F /* PhotoServiceProtocol.swift in Sources */,
 				01F968A21F71E1AE00C6BB89 /* PhotoCell.swift in Sources */,

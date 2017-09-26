@@ -22,7 +22,7 @@ class PhotoViewController: UIViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets.zero
         layout.minimumLineSpacing = 0
-        layout.itemSize = CGSize(width: 50, height: 50) // self.frame.size
+        layout.itemSize = self.view.frame.size // CGSize(width: 50, height: 50)
         layout.scrollDirection = .horizontal
         
         photoCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)

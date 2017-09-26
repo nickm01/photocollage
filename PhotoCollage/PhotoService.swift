@@ -2,8 +2,7 @@ import Foundation
 
 class PhotoService: PhotoServiceProtocol {
     
-    static let sharedInstance = TestPhotoService()
-    
+    static let sharedInstance = PhotoService()
     static var shared: PhotoServiceProtocol { return sharedInstance }
     
     let unsplashClientId = "c9b97043ba3f66181d31a05b5de431316a79b3d38f6fb847a20382dedcc03269"
@@ -21,7 +20,7 @@ class PhotoService: PhotoServiceProtocol {
                 print(error!)
             } else {
                 if let usableData = data {
-                    let photoURLs: [URL] = self.deserializePhotoDataToMediumStrings(data: usableData).map{URL(string: $0)!}
+                    let photoURLs = PhotoMeta.decodeToUrls(data: usableData)
                     DispatchQueue.main.async {
                         callback(photoURLs)
                     }
@@ -29,29 +28,6 @@ class PhotoService: PhotoServiceProtocol {
             }
         }
         task.resume()
-    }
-    
-    private func deserializePhotoDataToMediumStrings(data: Data) -> [String] {
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [Any] {
-                let photoURLStrings: [String] = json.map{element in
-                    if let jsonElement = element as? [String: Any],
-                        let userJson = jsonElement["user"] as? [String: Any],
-                        let profileImageJson = userJson["profile_image"] as? [String: Any],
-                        let mediumUrl = profileImageJson["medium"] as? String {
-                        return mediumUrl
-                    } else {
-                        return "https://cdn.browshot.com/static/images/not-found.png"
-                    }
-                }
-                return photoURLStrings
-            } else {
-                return []
-            }
-        } catch {
-            print("error")
-            return []
-        }
     }
     
     func fetchImageDataFromURL(url: URL, callback: @escaping (Data) -> ()) {
