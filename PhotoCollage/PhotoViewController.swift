@@ -1,7 +1,5 @@
 import UIKit
 
-// TODO: rework JSON deserialization code (see https://grokswift.com/json-swift-4/)
-
 class PhotoViewController: UIViewController {
     
     let photoService = PhotoService()
@@ -39,10 +37,16 @@ class PhotoViewController: UIViewController {
 
         photoCollectionView.isPagingEnabled = true
         
-        self.loadMoreUrls()
+        self.loadMore()
     }
     
-    func loadMoreUrls() {
+    func loadMoreIfNeeded() {
+        if !self.batchUpdating && self.maxIndex > self.cellCount - (self.pagingCount / 2) {
+            self.loadMore()
+        }
+    }
+    
+    func loadMore() {
         let startingIndex = self.cellCount
         let startingUrlsIndex = self.urls.count
         self.urls += Array(repeating: nil, count: self.pagingCount)
@@ -66,9 +70,7 @@ class PhotoViewController: UIViewController {
             self.photoCollectionView.insertItems(at: indexPaths)
         }, completion: {[unowned self] success in
             self.batchUpdating = false
-            if self.maxIndex > self.cellCount - (self.pagingCount / 2) {
-                self.loadMoreUrls()
-            }
+            self.loadMoreIfNeeded()
         })
     }
     
@@ -91,6 +93,10 @@ class PhotoViewController: UIViewController {
             self.images[index] = image
         })
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.loadMoreIfNeeded()
+    }
 }
 
 extension PhotoViewController: UICollectionViewDelegate {
@@ -105,6 +111,7 @@ extension PhotoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseId, for: indexPath) as! PhotoCell
         let index = indexPath.row
+        
         if index < self.urls.count, let url = self.urls[index] {
             self.configureAndStoreImage(cell: cell, storedImage: self.images[index], url: url, index: index)
         }
@@ -112,12 +119,9 @@ extension PhotoViewController: UICollectionViewDataSource {
         if index > self.maxIndex {
             self.maxIndex = index
             print("max:\(self.maxIndex)")
-
-        }
-        if !self.batchUpdating && self.maxIndex > self.cellCount - (self.pagingCount / 2) {
-            self.loadMoreUrls()
         }
 
+        self.loadMoreIfNeeded()
         return cell
     }
 }
